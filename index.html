@@ -40,12 +40,13 @@
         var timeLeft = endDateTime - currentTime;
 
         // Convertir le temps restant en heures, minutes et secondes
+        var days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
         var hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         var minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
         var seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
         // Afficher le compte à rebours dans le div "countdown"
-        document.getElementById("countdown").innerHTML = hours + "h " + minutes + "m " + seconds + "s ";
+        document.getElementById("countdown").innerHTML = days + "j " + hours + "h " + minutes + "m " + seconds + "s ";
       }, 1000);
 
       // Enregistrer les valeurs de saisie dans localStorage lors de la soumission du formulaire
