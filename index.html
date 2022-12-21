@@ -19,7 +19,24 @@
     var form = document.querySelector('form');
     var endDateInput = document.getElementById('end-date');
     var endTimeInput = document.getElementById('end-time');   
-    let intervalId; 
+    var endDateTime;
+    
+    function updateCountdown() {
+      // Calculer le temps restant en utilisant la différence entre l'heure actuelle et l'heure de fin
+      var currentTime = new Date().getTime();
+      var timeLeft = endDateTime - currentTime;
+
+      // Convertir le temps restant en heures, minutes et secondes
+      var days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+      // Afficher le compte à rebours dans le div "countdown"
+      document.getElementById("countdown").innerHTML = days + "j " + hours + "h " + minutes + "m " + seconds + "s ";
+
+      setTimeout(updateCountdown, 1000);
+    }
 
     function onSubmit() {
       // Récupérer la valeur des champs de saisie
@@ -27,27 +44,9 @@
       var endTime = endTimeInput.value;
 
       // Définir l'heure de fin en utilisant les valeurs de saisie
-      var endDateTime = new Date(endDate + 'T' + endTime).getTime();
+      endDateTime = new Date(endDate + 'T' + endTime).getTime();
 
-      if (intervalId) {
-        clearInterval(intervalId);
-      }
-
-      // Mettre à jour le compte à rebours toutes les 1000ms (1s)
-      intervalId = setInterval(function() {
-        // Calculer le temps restant en utilisant la différence entre l'heure actuelle et l'heure de fin
-        var currentTime = new Date().getTime();
-        var timeLeft = endDateTime - currentTime;
-
-        // Convertir le temps restant en heures, minutes et secondes
-        var days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-        var hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-        // Afficher le compte à rebours dans le div "countdown"
-        document.getElementById("countdown").innerHTML = days + "j " + hours + "h " + minutes + "m " + seconds + "s ";
-      }, 1000);
+      updateCountdown();
 
       // Enregistrer les valeurs de saisie dans localStorage lors de la soumission du formulaire
       localStorage.setItem('endDate', endDateInput.value);
