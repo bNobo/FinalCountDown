@@ -14,16 +14,14 @@
     <input type="submit" value="Démarrer le compte à rebours">
   </form>
   <div id="countdown"></div>
-  <script>
+  <script>    
     // Récupérer les éléments de formulaire
     var form = document.querySelector('form');
     var endDateInput = document.getElementById('end-date');
-    var endTimeInput = document.getElementById('end-time');
+    var endTimeInput = document.getElementById('end-time');   
+    let intervalId; 
 
-    form.addEventListener('submit', function(event) {
-      // Empêcher le rechargement de la page lors de la soumission du formulaire
-      event.preventDefault();
-
+    function onSubmit() {
       // Récupérer la valeur des champs de saisie
       var endDate = endDateInput.value;
       var endTime = endTimeInput.value;
@@ -31,8 +29,12 @@
       // Définir l'heure de fin en utilisant les valeurs de saisie
       var endDateTime = new Date(endDate + 'T' + endTime).getTime();
 
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+
       // Mettre à jour le compte à rebours toutes les 1000ms (1s)
-      setInterval(function() {
+      intervalId = setInterval(function() {
         // Calculer le temps restant en utilisant la différence entre l'heure actuelle et l'heure de fin
         var currentTime = new Date().getTime();
         var timeLeft = endDateTime - currentTime;
@@ -45,7 +47,29 @@
         // Afficher le compte à rebours dans le div "countdown"
         document.getElementById("countdown").innerHTML = hours + "h " + minutes + "m " + seconds + "s ";
       }, 1000);
+
+      // Enregistrer les valeurs de saisie dans localStorage lors de la soumission du formulaire
+      localStorage.setItem('endDate', endDateInput.value);
+      localStorage.setItem('endTime', endTimeInput.value);
+    }
+
+    form.addEventListener('submit', function(event) {
+        // Empêcher le rechargement de la page lors de la soumission du formulaire
+        event.preventDefault();
+        onSubmit();
     });
+
+    // Récupérer les valeurs de localStorage s'il y en a
+    var storedEndDate = localStorage.getItem('endDate');
+    var storedEndTime = localStorage.getItem('endTime');
+
+    // Si les valeurs de localStorage existent, remplir les champs de formulaire avec ces valeurs
+    if (storedEndDate && storedEndTime) {
+        endDateInput.value = storedEndDate;
+        endTimeInput.value = storedEndTime;
+        onSubmit();
+    }
+
   </script>
 </body>
 </html>
