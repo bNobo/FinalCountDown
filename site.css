@@ -1,52 +1,51 @@
 body {
-    background-color: #FFB6C1;
-    color: #000000;
-    font-family: "Comic Sans MS", sans-serif;
-    text-align: center;
-  }
-  
-  h1 {
-    color: #FFFFFF;
-    background-color: #FF69B4;
-    border-radius: 25px;
-    padding: 20px;
-    margin: 0 10px 0 0;
-  }
-  
-  form {
-    margin: 20px;
-  }
-  
-  label {
-    display: block;
-    margin: 10px 0;
-    font-size: 1.2em;
-  }
-  
-  input[type="date"],
-  input[type="time"],
-  input[type="submit"] {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1em;
-  }
-  
-  input[type="submit"] {
-    background-color: #FF69B4;
-    color: #FFFFFF;
-    cursor: pointer;
-  }
-  
-  #countdown {
-    font-size: 3em;
-    margin: 20px 0;
-  }
-  
-  #logo {
-    width: 50px;
-    border-radius: 50%;
-    vertical-align: middle;
-    margin-right: 10px;
-  }
-  
+  background-color: #000000;
+  color: #FFFFFF;
+  font-family: "Arial", sans-serif;
+  text-align: center;
+}
+
+h1 {
+  color: #D3D3D3;
+  background-color: #191970;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 0 5px 0 0;
+}
+
+form {
+  margin: 10px;
+}
+
+label {
+  display: block;
+  margin: 5px 0;
+  font-size: 1.2em;
+}
+
+input[type="date"],
+input[type="time"],
+input[type="submit"] {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  font-size: 1em;
+}
+
+input[type="submit"] {
+  background-color: #191970;
+  color: #D3D3D3;
+  cursor: pointer;
+}
+
+#countdown {
+  font-size: 3em;
+  margin: 10px 0;
+}
+
+#logo {
+  width: 75px;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-right: 5px;
+}
